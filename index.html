@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Didi! 🎂✨ Memories & Celebrations</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter, Caveat & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+    .font-serif-title {
+      font-family: 'Playfair Display', serif;
+    }
+    .font-handwriting {
+      font-family: 'Caveat', cursive;
+    }
+    /* Floating animated balloons */
+    @keyframes floatUp {
+      0% { transform: translateY(115vh) rotate(0deg); opacity: 0.9; }
+      100% { transform: translateY(-25vh) rotate(360deg); opacity: 0; }
+    }
+    .balloon {
+      position: fixed;
+      bottom: -100px;
+      pointer-events: none;
+      z-index: 35;
+      animation: floatUp 15s linear infinite;
+    }
+    /* Candle flame flicker */
+    @keyframes flicker {
+      0%, 100% { transform: scale(1) rotate(-2deg); opacity: 0.92; }
+      50% { transform: scale(1.15, 1.25) rotate(2deg); opacity: 1; filter: drop-shadow(0 0 14px #f59e0b); }
+    }
+    .flame-active {
+      animation: flicker 0.9s infinite alternate ease-in-out;
+    }
+    /* Subtle pulse glow */
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 25px rgba(244, 63, 94, 0.3); }
+      50% { box-shadow: 0 0 45px rgba(251, 146, 60, 0.55); }
+    }
+    .glow-card {
+      animation: pulseGlow 4s infinite ease-in-out;
+    }
+    /* Glassmorphism */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    /* Confetti Canvas Overlay */
+    #confettiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-rose-50 via-amber-50 to-pink-100 text-stone-800 min-h-screen relative overflow-x-hidden selection:bg-rose-500 selection:text-white">
+
+  <!-- Dedicated Fullscreen Canvas for Confetti -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Interactive Floating Balloons Container -->
+  <div id="balloon-container" class="pointer-events-none fixed inset-0 overflow-hidden z-30"></div>
+
+  <!-- Audio and Quick Action Floating Bar -->
+  <header class="fixed top-3 right-3 sm:top-5 sm:right-6 z-50 flex items-center gap-2">
+    <button id="musicToggleBtn" onclick="toggleBirthdayMelody()" class="glass-nav border border-rose-200/90 shadow-lg hover:shadow-rose-200 px-3.5 py-2 rounded-full flex items-center gap-2 text-rose-700 font-semibold text-xs sm:text-sm transition-all transform hover:scale-105 active:scale-95">
+      <span id="musicIcon" class="flex items-center">
+        <i data-lucide="volume-2" class="w-4 h-4 text-rose-600"></i>
+      </span>
+      <span id="musicText" class="hidden sm:inline">Play B'day Melody 🎵</span>
+    </button>
+    <button onclick="triggerCakeCeremony()" class="glass-nav border border-amber-300 shadow-lg px-3.5 py-2 rounded-full text-amber-900 font-semibold text-xs sm:text-sm hover:bg-amber-100/70 transition-all flex items-center gap-1.5 active:scale-95">
+      <i data-lucide="sparkles" class="w-4 h-4 text-rose-500 fill-rose-500"></i>
+      <span>Cut Cake 🎂</span>
+    </button>
+  </header>
+
+  <main>
+    <!-- Hero Banner Section -->
+    <section class="relative pt-20 pb-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-100/90 border border-rose-300 text-rose-700 text-xs sm:text-sm font-semibold tracking-wide uppercase shadow-sm mb-4">
+        <span>✨ Dedicated to Our Wonderful Didi ✨</span>
+      </div>
+
+      <h1 class="font-serif-title text-4xl sm:text-6xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-rose-600 via-pink-600 to-amber-600 mb-4 leading-tight">
+        Happy Birthday, Didi! 🎂💖
+      </h1>
+
+      <p class="font-handwriting text-2xl sm:text-3xl md:text-4xl text-rose-700 max-w-3xl mx-auto mb-5">
+        "प्यारी दीदी, आपकी मुस्कान हमारे पूरे परिवार की शान और सबसे बड़ी रौनक है!"
+      </p>
+
+      <p class="text-stone-600 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed mb-8">
+        From childhood teasing and festival prayers to our fun car road trips—thank you for your unconditional affection, your graceful smile, and for being the guiding pillar for all your brothers.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 mb-10">
+        <button onclick="triggerCakeCeremony()" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold text-sm sm:text-base shadow-xl shadow-rose-300/60 hover:from-rose-600 hover:to-pink-700 transform hover:-translate-y-1 transition duration-200 flex items-center gap-2">
+          <span>🎂 Celebrate & Cut Cake</span>
+        </button>
+        <a href="#memoriesGallery" class="px-6 py-3.5 rounded-2xl bg-white border border-rose-200 text-stone-700 font-bold text-sm sm:text-base shadow-md hover:bg-rose-50 hover:border-rose-300 transform hover:-translate-y-1 transition duration-200 flex items-center gap-2">
+          <i data-lucide="image" class="w-4 h-4 text-rose-500"></i>
+          <span>Relive Our Memories</span>
+        </a>
+      </div>
+
+      <!-- Interactive Virtual Cake Section -->
+      <div id="cakeArea" class="max-w-md mx-auto bg-white/85 backdrop-blur-md rounded-3xl p-6 shadow-xl border border-rose-200/90 glow-card transition-all duration-300">
+        <div class="flex items-center justify-between pb-3 border-b border-rose-100 mb-4">
+          <span class="text-xs font-semibold uppercase tracking-wider text-rose-500">Virtual Celebration Stage</span>
+          <span id="candleStatus" class="text-xs font-bold px-2.5 py-1 rounded-full bg-amber-100 text-amber-800">Candle Lit 🕯️</span>
+        </div>
+
+        <!-- 3D Layered Birthday Cake -->
+        <div class="relative flex flex-col items-center justify-center my-3 py-2">
+          <!-- Flame -->
+          <div id="candleFlame" class="flame-active w-4 h-7 bg-gradient-to-t from-amber-500 via-yellow-300 to-white rounded-full mx-auto cursor-pointer transition-all duration-500 filter drop-shadow-[0_0_8px_#f59e0b]" title="Click flame to blow candle!" onclick="blowCandle()"></div>
+          <!-- Candle Stick -->
+          <div class="w-2.5 h-10 bg-gradient-to-b from-rose-300 via-white to-pink-400 rounded-t-sm shadow-inner mx-auto -mt-1"></div>
+          
+          <!-- Cake Top Layer -->
+          <div class="w-36 h-10 bg-gradient-to-r from-rose-200 via-pink-100 to-rose-200 rounded-t-2xl shadow-inner relative flex items-center justify-around px-2 border-b-2 border-rose-300/40">
+            <span class="text-sm">🍓</span>
+            <span class="text-xs font-serif-title font-bold text-rose-600">DIDI</span>
+            <span class="text-sm">🍓</span>
+          </div>
+
+          <!-- Cake Middle Layer -->
+          <div class="w-48 h-12 bg-gradient-to-r from-amber-100 via-orange-50 to-amber-100 rounded-md relative flex items-center justify-center shadow-md border-b-2 border-amber-200">
+            <div class="w-full flex justify-around text-xs opacity-75">
+              <span>🌸</span><span>✨</span><span>💖</span><span>✨</span><span>🌸</span>
+            </div>
+          </div>
+
+          <!-- Cake Base Layer -->
+          <div class="w-60 h-14 bg-gradient-to-r from-rose-400 via-pink-400 to-rose-500 rounded-b-2xl shadow-lg relative flex items-center justify-center text-white font-bold text-sm tracking-widest">
+            HAPPY BIRTHDAY
+          </div>
+
+          <!-- Cake Tray -->
+          <div class="w-64 sm:w-72 h-4 bg-gradient-to-r from-stone-200 via-stone-100 to-stone-300 rounded-full shadow-md mt-1 border-t border-white"></div>
+        </div>
+
+        <p id="cakeInstruction" class="text-xs sm:text-sm text-stone-500 mt-3 font-medium">
+          👉 Tap the <span class="text-amber-600 font-bold">Candle Flame</span> to blow it or click the button below to celebrate!
+        </p>
+
+        <div class="mt-4 flex gap-2">
+          <button onclick="blowCandle()" class="flex-1 py-2.5 px-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold text-xs sm:text-sm shadow-md transition-all active:scale-95 flex items-center justify-center gap-1.5">
+            <i data-lucide="wind" class="w-4 h-4"></i> Blow Candle
+          </button>
+          <button onclick="cutCake()" class="flex-1 py-2.5 px-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs sm:text-sm shadow-md transition-all active:scale-95 flex items-center justify-center gap-1.5">
+            <i data-lucide="sparkles" class="w-4 h-4"></i> Cut Cake! 🍰
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sister Love Tribute Banner -->
+    <section class="max-w-4xl mx-auto px-4 py-4">
+      <div class="rounded-3xl bg-gradient-to-r from-purple-900 via-rose-800 to-amber-800 p-6 sm:p-10 text-white shadow-2xl relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="absolute -left-10 -top-10 w-48 h-48 bg-pink-500/20 rounded-full blur-2xl pointer-events-none"></div>
+        
+        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="space-y-3 text-center md:text-left">
+            <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold tracking-wider uppercase backdrop-blur-sm">A Brother's Heartfelt Tribute</span>
+            <h2 class="font-serif-title text-2xl sm:text-3xl md:text-4xl font-bold leading-snug">
+              "हर कदम पर आपका साया, जैसे ईश्वर का सच्चा आशीर्वाद!"
+            </h2>
+            <p class="text-rose-100 text-sm sm:text-base leading-relaxed max-w-2xl font-light">
+              चाहे छठ पूजा के पावन घाट हों, रक्षाबंधन पर कलाई पर बंधा रक्षा सूत्र हो, छत पर बैठकर की गई हंसी-मजाक हो, या गाड़ी की स्टेयरिंग संभालते वक्त आपके चेहरे का भरोसा—दीदी, आप हमेशा हमारी सबसे बड़ी ताकत और प्रेरणा रही हैं। 
+            </p>
+          </div>
+          <div class="shrink-0 flex flex-col items-center gap-2">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/15 border-2 border-white/40 flex items-center justify-center text-4xl shadow-inner backdrop-blur-md">
+              👑
+            </div>
+            <span class="font-handwriting text-2xl text-amber-200">World's Best Didi</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Car Drive Memory Video Player -->
+    <section class="max-w-4xl mx-auto px-4 py-8">
+      <div class="glass-card border border-rose-200 rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-11 h-11 rounded-2xl bg-amber-500 text-white flex items-center justify-center shadow-md">
+            <i data-lucide="video" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h2 class="font-serif-title font-bold text-xl sm:text-2xl text-stone-800">Memories in Motion: Didi Driving! 🚗🎬</h2>
+            <p class="text-stone-500 text-xs sm:text-sm">"अरे दीदी तो पूरा प्रो ड्राइवर बन गईं!" — The iconic family car trip</p>
+          </div>
+        </div>
+
+        <!-- Video Player Wrapper with direct source and fallback -->
+        <div class="rounded-2xl overflow-hidden bg-stone-900 border border-stone-800 shadow-inner relative aspect-video flex items-center justify-center text-white">
+          <video 
+            id="drivingVideo" 
+            controls 
+            playsinline 
+            preload="metadata"
+            class="w-full h-full object-contain"
+            src="video_20221002_143949.mp4"
+            onerror="handleVideoError(this)"
+          >
+            Your browser does not support HTML5 video playback.
+          </video>
+          
+          <!-- Fallback display if video is loading or file placed in custom path -->
+          <div id="videoFallbackPrompt" class="hidden p-6 text-center max-w-md absolute inset-0 bg-stone-900/90 flex flex-col items-center justify-center">
+            <div class="w-16 h-16 rounded-full bg-rose-600/30 border border-rose-500 flex items-center justify-center mb-3">
+              <i data-lucide="car" class="w-8 h-8 text-amber-300"></i>
+            </div>
+            <h4 class="font-bold text-base sm:text-lg mb-1">Didi's Car Drive Video</h4>
+            <p class="text-stone-300 text-xs sm:text-sm mb-3 leading-relaxed">
+              Didi handling the steering wheel with pure confidence and smiles all around! Ensure <code>video_20221002_143949.mp4</code> is in the same directory.
+            </p>
+            <button onclick="retryVideoPlayback()" class="px-4 py-2 rounded-full bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold shadow">
+              Retry Playback
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-4 flex flex-wrap items-center justify-between text-xs text-stone-500 gap-2">
+          <span class="flex items-center gap-1.5"><i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500"></i> Smiling in the driver seat with proud brothers cheering!</span>
+          <span class="text-rose-600 font-semibold">Special memories that stay forever 🚗✨</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Memory Lane: Photo Gallery Section -->
+    <section id="memoriesGallery" class="max-w-6xl mx-auto px-4 py-12">
+      <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase mb-2">
+          <span>Golden Memories Timeline 📸</span>
+        </div>
+        <h2 class="font-serif-title text-3xl sm:text-4xl md:text-5xl font-bold text-stone-800">
+          Our Cherished Moments with Didi
+        </h2>
+        <p class="text-stone-600 text-sm sm:text-base mt-2 max-w-xl mx-auto">
+          Every photo captures your warmth, our festivals, late night roof chats, and brotherly adoration. Click any picture to view full size!
+        </p>
+      </div>
+
+      <!-- Photo Grid -->
+      <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        
+        <!-- Photo 1: Chhath Puja Ghat -->
+        <div onclick="openLightbox(0)" class="group cursor-pointer bg-white rounded-3xl p-4 shadow-lg hover:shadow-2xl border border-rose-100 transition duration-300 transform hover:-translate-y-2 flex flex-col justify-between">
+          <div class="relative overflow-hidden rounded-2xl aspect-[4/3] bg-stone-100">
+            <img src="IMG_20201120_165033.jpg" alt="Chhath Puja Blessings" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="handleImgError(this, '🙏 Chhath Puja Blessings', 'from-amber-100 to-rose-100')">
+            <div class="absolute top-3 left-3 bg-stone-900/75 text-white text-[11px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm flex items-center gap-1">
+              <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-400"></i> Chhath Puja
+            </div>
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3.5 py-1.5 rounded-full bg-white text-stone-900 text-xs font-bold shadow">View Photo</span>
+            </div>
+          </div>
+          <div class="pt-4">
+            <div class="flex items-center justify-between text-xs text-stone-400 font-medium mb-1">
+              <span>Festival Ghat</span>
+              <span>Nov 2020</span>
+            </div>
+            <h3 class="font-serif-title font-bold text-lg text-stone-800 group-hover:text-rose-600 transition">
+              Holy Chhath & Festive Blessings 🙏
+            </h3>
+            <p class="text-stone-600 text-xs sm:text-sm mt-1 leading-relaxed">
+              Standing together at the puja ghat in vibrant traditional colors, sharing divine blessings and radiant smiles.
+            </p>
+          </div>
+        </div>
+
+        <!-- Photo 2: Raksha Bandhan Aarti & Teeka -->
+        <div onclick="openLightbox(1)" class="group cursor-pointer bg-white rounded-3xl p-4 shadow-lg hover:shadow-2xl border border-rose-100 transition duration-300 transform hover:-translate-y-2 flex flex-col justify-between">
+          <div class="relative overflow-hidden rounded-2xl aspect-[4/3] bg-stone-100">
+            <img src="IMG-20200803-WA0084.jpg" alt="Raksha Bandhan Teeka" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="handleImgError(this, '🪔 Aarti & Holy Teeka', 'from-rose-100 to-pink-100')">
+            <div class="absolute top-3 left-3 bg-stone-900/75 text-white text-[11px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm flex items-center gap-1">
+              <i data-lucide="heart" class="w-3.5 h-3.5 text-rose-400"></i> Raksha Bandhan
+            </div>
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3.5 py-1.5 rounded-full bg-white text-stone-900 text-xs font-bold shadow">View Photo</span>
+            </div>
+          </div>
+          <div class="pt-4">
+            <div class="flex items-center justify-between text-xs text-stone-400 font-medium mb-1">
+              <span>Rakhi Aarti</span>
+              <span>Aug 2020</span>
+            </div>
+            <h3 class="font-serif-title font-bold text-lg text-stone-800 group-hover:text-rose-600 transition">
+              Aarti Thali & Sacred Teeka 🪔
+            </h3>
+            <p class="text-stone-600 text-xs sm:text-sm mt-1 leading-relaxed">
+              Didi holding the aarti thali, diya, and applying the holy teeka with so much love, warmth, and blessings for her brothers.
+            </p>
+          </div>
+        </div>
+
+        <!-- Photo 3: Rakhi Tying Ceremony -->
+        <div onclick="openLightbox(2)" class="group cursor-pointer bg-white rounded-3xl p-4 shadow-lg hover:shadow-2xl border border-rose-100 transition duration-300 transform hover:-translate-y-2 flex flex-col justify-between">
+          <div class="relative overflow-hidden rounded-2xl aspect-[4/3] bg-stone-100">
+            <img src="IMG-20200803-WA0004.jpg" alt="Rakhi Tying" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="handleImgError(this, '🧵 Tying the Sacred Thread', 'from-amber-50 to-orange-100')">
+            <div class="absolute top-3 left-3 bg-stone-900/75 text-white text-[11px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm flex items-center gap-1">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-300"></i> Pure Tradition
+            </div>
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3.5 py-1.5 rounded-full bg-white text-stone-900 text-xs font-bold shadow">View Photo</span>
+            </div>
+          </div>
+          <div class="pt-4">
+            <div class="flex items-center justify-between text-xs text-stone-400 font-medium mb-1">
+              <span>Raksha Sutra</span>
+              <span>Eternal Care</span>
+            </div>
+            <h3 class="font-serif-title font-bold text-lg text-stone-800 group-hover:text-rose-600 transition">
+              Tying the Sacred Rakhi 🧵
+            </h3>
+            <p class="text-stone-600 text-xs sm:text-sm mt-1 leading-relaxed">
+              Tying the protective Rakhi thread on brothers' wrists—a sacred bond of affection and duty that stays unbroken forever.
+            </p>
+          </div>
+        </div>
+
+        <!-- Photo 4: Durga Puja Street Walk in Blue Saree -->
+        <div onclick="openLightbox(3)" class="group cursor-pointer bg-white rounded-3xl p-4 shadow-lg hover:shadow-2xl border border-rose-100 transition duration-300 transform hover:-translate-y-2 flex flex-col justify-between">
+          <div class="relative overflow-hidden rounded-2xl aspect-[4/3] bg-stone-100">
+            <img src="IMG_20221004_170625.jpg" alt="Durga Puja Saree Walk" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="handleImgError(this, '🥻 Royal Saree & Puja Stroll', 'from-teal-100 to-sky-100')">
+            <div class="absolute top-3 left-3 bg-stone-900/75 text-white text-[11px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm flex items-center gap-1">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-teal-300"></i> Durga Puja
+            </div>
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3.5 py-1.5 rounded-full bg-white text-stone-900 text-xs font-bold shadow">View Photo</span>
+            </div>
+          </div>
+          <div class="pt-4">
+            <div class="flex items-center justify-between text-xs text-stone-400 font-medium mb-1">
+              <span>Dussehra Fair</span>
+              <span>Oct 2022</span>
+            </div>
+            <h3 class="font-serif-title font-bold text-lg text-stone-800 group-hover:text-rose-600 transition">
+              Royal Blue Saree & Festive Walk ✨
+            </h3>
+            <p class="text-stone-600 text-xs sm:text-sm mt-1 leading-relaxed">
+              Didi looking stunning in her blue silk saree with gold borders, strolling through the festive streets with all her brothers!
+            </p>
+          </div>
+        </div>
+
+        <!-- Photo 5: Night Rooftop Family Chat -->
+        <div onclick="openLightbox(4)" class="group cursor-pointer bg-white rounded-3xl p-4 shadow-lg hover:shadow-2xl border border-rose-100 transition duration-300 transform hover:-translate-y-2 flex flex-col justify-between">
+          <div class="relative overflow-hidden rounded-2xl aspect-[4/3] bg-stone-100">
+            <img src="IMG_20191027_205612.jpg" alt="Night Rooftop Hangout" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="handleImgError(this, '🌌 Night Rooftop Talks', 'from-indigo-900 to-purple-900', true)">
+            <div class="absolute top-3 left-3 bg-stone-900/75 text-white text-[11px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm flex items-center gap-1">
+              <i data-lucide="moon" class="w-3.5 h-3.5 text-yellow-300"></i> Terrace Night
+            </div>
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3.5 py-1.5 rounded-full bg-white text-stone-900 text-xs font-bold shadow">View Photo</span>
+            </div>
+          </div>
+          <div class="pt-4">
+            <div class="flex items-center justify-between text-xs text-stone-400 font-medium mb-1">
+              <span>Terrace Talks</span>
+              <span>Oct 2019</span>
+            </div>
+            <h3 class="font-serif-title font-bold text-lg text-stone-800 group-hover:text-rose-600 transition">
+              Chilly Nights & Sweet Rooftop Talks 🌙
+            </h3>
+            <p class="text-stone-600 text-xs sm:text-sm mt-1 leading-relaxed">
+              Standing on the roof terrace, Kurkure snack in hand, red shawl wrapped, and carefree smiles under the night sky.
+            </p>
+          </div>
+        </div>
+
+        <!-- Photo 6: Hill View Family Outing -->
+        <div onclick="openLightbox(5)" class="group cursor-pointer bg-white rounded-3xl p-4 shadow-lg hover:shadow-2xl border border-rose-100 transition duration-300 transform hover:-translate-y-2 flex flex-col justify-between">
+          <div class="relative overflow-hidden rounded-2xl aspect-[4/3] bg-stone-100">
+            <img src="IMG-20190708-WA0016.jpg" alt="Scenic Hills Trip" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="handleImgError(this, '🏞️ Scenic Hills Trip', 'from-sky-100 to-indigo-100')">
+            <div class="absolute top-3 left-3 bg-stone-900/75 text-white text-[11px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm flex items-center gap-1">
+              <i data-lucide="camera" class="w-3.5 h-3.5 text-sky-400"></i> Trip Memories
+            </div>
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3.5 py-1.5 rounded-full bg-white text-stone-900 text-xs font-bold shadow">View Photo</span>
+            </div>
+          </div>
+          <div class="pt-4">
+            <div class="flex items-center justify-between text-xs text-stone-400 font-medium mb-1">
+              <span>Hill Outing</span>
+              <span>July 2019</span>
+            </div>
+            <h3 class="font-serif-title font-bold text-lg text-stone-800 group-hover:text-rose-600 transition">
+              All Smiles Together in Nature 🌿
+            </h3>
+            <p class="text-stone-600 text-xs sm:text-sm mt-1 leading-relaxed">
+              Family trips with green hills behind us and happy cheerful faces in front. Didi’s smile brightening up every picture.
+            </p>
+          </div>
+        </div>
+
+        <!-- Photo 7: Family Reunion Celebration -->
+        <div onclick="openLightbox(6)" class="group cursor-pointer bg-white rounded-3xl p-4 shadow-lg hover:shadow-2xl border border-rose-100 transition duration-300 transform hover:-translate-y-2 flex flex-col justify-between">
+          <div class="relative overflow-hidden rounded-2xl aspect-[4/3] bg-stone-100">
+            <img src="IMG-20220812-WA0040.jpg" alt="Family Reunion" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="handleImgError(this, '🏡 Family Festivities', 'from-rose-100 to-amber-100')">
+            <div class="absolute top-3 left-3 bg-stone-900/75 text-white text-[11px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm flex items-center gap-1">
+              <i data-lucide="heart" class="w-3.5 h-3.5 text-rose-500"></i> Family Together
+            </div>
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3.5 py-1.5 rounded-full bg-white text-stone-900 text-xs font-bold shadow">View Photo</span>
+            </div>
+          </div>
+          <div class="pt-4">
+            <div class="flex items-center justify-between text-xs text-stone-400 font-medium mb-1">
+              <span>Family Reunion</span>
+              <span>Aug 2022</span>
+            </div>
+            <h3 class="font-serif-title font-bold text-lg text-stone-800 group-hover:text-rose-600 transition">
+              United in Love & Blessings 👨‍👩‍👧‍👦
+            </h3>
+            <p class="text-stone-600 text-xs sm:text-sm mt-1 leading-relaxed">
+              Surrounded by all brothers and sisters in traditional kurtas and sarees, sharing joyous festivities at home.
+            </p>
+          </div>
+        </div>
+
+        <!-- Photo 8: Sibling Candid Moment -->
+        <div onclick="openLightbox(7)" class="group cursor-pointer bg-white rounded-3xl p-4 shadow-lg hover:shadow-2xl border border-rose-100 transition duration-300 transform hover:-translate-y-2 flex flex-col justify-between">
+          <div class="relative overflow-hidden rounded-2xl aspect-[4/3] bg-stone-100">
+            <img src="IMG-20220812-WA0009.jpg" alt="Candid Moments" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="handleImgError(this, '✨ Quiet Candid Bonding', 'from-pink-100 to-rose-200')">
+            <div class="absolute top-3 left-3 bg-stone-900/75 text-white text-[11px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm flex items-center gap-1">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-pink-400"></i> Quiet Moments
+            </div>
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <span class="px-3.5 py-1.5 rounded-full bg-white text-stone-900 text-xs font-bold shadow">View Photo</span>
+            </div>
+          </div>
+          <div class="pt-4">
+            <div class="flex items-center justify-between text-xs text-stone-400 font-medium mb-1">
+              <span>At Home</span>
+              <span>Candid Peace</span>
+            </div>
+            <h3 class="font-serif-title font-bold text-lg text-stone-800 group-hover:text-rose-600 transition">
+              Peaceful Sibling Presence 🌸
+            </h3>
+            <p class="text-stone-600 text-xs sm:text-sm mt-1 leading-relaxed">
+              Quiet moments of comfort at home—just sitting together, knowing we always have each other's back no matter where life leads.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Grand Finale / Fireworks Toast Section -->
+    <section class="max-w-4xl mx-auto px-4 pb-20 pt-6 text-center">
+      <div class="rounded-3xl bg-stone-950 text-white p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+        <canvas id="fireworksCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+        <div class="relative z-10 space-y-4">
+          <h2 class="font-serif-title text-3xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-rose-300 to-pink-300">
+            Cheers to another glorious year, Didi! 🥂✨
+          </h2>
+          <p class="text-stone-300 text-sm sm:text-base max-w-xl mx-auto">
+            May God grant you endless health, deep peace, blooming happiness, and every dream you cherish!
+          </p>
+          <div class="pt-4 flex flex-wrap justify-center gap-3">
+            <button onclick="launchFireworks()" class="px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 to-rose-500 hover:from-amber-500 hover:to-rose-600 text-stone-950 font-extrabold text-sm shadow-lg transition active:scale-95 flex items-center gap-2">
+              <i data-lucide="sparkles" class="w-4 h-4"></i> Launch Fireworks! 🎆
+            </button>
+            <button onclick="copyShareMessage()" class="px-6 py-3 rounded-full bg-stone-800 hover:bg-stone-700 text-white font-semibold text-sm border border-stone-700 transition active:scale-95 flex items-center gap-2">
+              <i data-lucide="copy" class="w-4 h-4"></i> Copy Birthday Message
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox Modal -->
+  <div id="lightboxModal" class="fixed inset-0 bg-stone-950/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative animate-in fade-in zoom-in duration-200">
+      <button onclick="closeLightbox()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-stone-900/60 hover:bg-stone-900 text-white flex items-center justify-center transition z-20">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div id="lightboxVisual" class="w-full aspect-[4/3] bg-stone-100 flex items-center justify-center overflow-hidden relative">
+        <!-- Rendered dynamically -->
+      </div>
+      <div class="p-6">
+        <div class="flex items-center justify-between text-xs font-semibold text-rose-500 uppercase tracking-wider mb-1">
+          <span id="lightboxTag">Sweet Memories</span>
+          <span>Sister Love</span>
+        </div>
+        <h3 id="lightboxTitle" class="font-serif-title font-bold text-2xl text-stone-800 mb-2">Memory Title</h3>
+        <p id="lightboxDescription" class="text-stone-600 text-sm leading-relaxed mb-4">Memory Description</p>
+        <div class="flex justify-between items-center pt-3 border-t border-stone-100">
+          <button onclick="navigateLightbox(-1)" class="px-4 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold flex items-center gap-1 active:scale-95">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Prev
+          </button>
+          <span class="text-xs text-stone-400 font-medium" id="lightboxCounter">1 / 8</span>
+          <button onclick="navigateLightbox(1)" class="px-4 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold flex items-center gap-1 active:scale-95">
+            Next <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 bg-stone-900 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 transform translate-y-24 opacity-0 transition duration-300 z-50">
+    <span id="toastIcon">✨</span>
+    <span id="toastText" class="text-sm font-medium">Notification message</span>
+  </div>
+
+  <script>
+    /* Initialize Lucide Icons Safely */
+    try {
+      if (window.lucide && typeof lucide.createIcons === 'function') {
+        lucide.createIcons();
+      }
+    } catch (err) {
+      console.warn('Lucide icons note:', err);
+    }
+
+    /* =========================================================
+       NATIVE ROBUST CONFETTI ENGINE (No Worker / No getBoundingClientRect bug)
+       ========================================================= */
+    const confettiCanvas = document.getElementById('confettiCanvas');
+    const confettiCtx = confettiCanvas.getContext('2d');
+    let confettiParticles = [];
+    let confettiAnimationId = null;
+
+    function resizeConfettiCanvas() {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeConfettiCanvas);
+    resizeConfettiCanvas();
+
+    function triggerConfettiBurst(options = {}) {
+      const count = options.particleCount || 75;
+      const colors = options.colors || ['#f43f5e', '#ec4899', '#fbbf24', '#3b82f6', '#10b981', '#a855f7'];
+      const originX = (options.origin && options.origin.x !== undefined) ? options.origin.x * confettiCanvas.width : confettiCanvas.width / 2;
+      const originY = (options.origin && options.origin.y !== undefined) ? options.origin.y * confettiCanvas.height : confettiCanvas.height * 0.6;
+
+      for (let i = 0; i < count; i++) {
+        const angle = (Math.random() * Math.PI * 2);
+        const speed = Math.random() * 9 + 4;
+        confettiParticles.push({
+          x: originX,
+          y: originY,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 5,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          size: Math.random() * 8 + 5,
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 12,
+          gravity: 0.22,
+          drag: 0.98,
+          alpha: 1,
+          decay: Math.random() * 0.015 + 0.008
+        });
+      }
+
+      if (!confettiAnimationId) {
+        animateConfetti();
+      }
+    }
+
+    function animateConfetti() {
+      confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      
+      for (let i = confettiParticles.length - 1; i >= 0; i--) {
+        const p = confettiParticles[i];
+        p.vx *= p.drag;
+        p.vy *= p.drag;
+        p.vy += p.gravity;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rotation += p.rotationSpeed;
+        p.alpha -= p.decay;
+
+        if (p.alpha <= 0 || p.y > confettiCanvas.height + 20) {
+          confettiParticles.splice(i, 1);
+          continue;
+        }
+
+        confettiCtx.save();
+        confettiCtx.globalAlpha = Math.max(0, p.alpha);
+        confettiCtx.translate(p.x, p.y);
+        confettiCtx.rotate((p.rotation * Math.PI) / 180);
+        confettiCtx.fillStyle = p.color;
+        confettiCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+        confettiCtx.restore();
+      }
+
+      if (confettiParticles.length > 0) {
+        confettiAnimationId = requestAnimationFrame(animateConfetti);
+      } else {
+        confettiAnimationId = null;
+        confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      }
+    }
+
+    // Global confetti shorthand alias
+    window.confetti = triggerConfettiBurst;
+
+    const memories = [
+      {
+        src: 'IMG_20201120_165033.jpg',
+        title: 'Holy Chhath & Festive Blessings 🙏',
+        tag: 'Chhath Puja',
+        desc: 'Standing together at the puja ghat in vibrant festive kurtas and dresses, celebrating the devotion, prasad, and sisterly blessings that unite us all.'
+      },
+      {
+        src: 'IMG-20200803-WA0084.jpg',
+        title: 'Aarti Thali & Sacred Teeka 🪔',
+        tag: 'Raksha Bandhan',
+        desc: 'Didi holding the aarti thali with diya, applying the auspicious teeka on brother’s forehead with so much tenderness and pure love.'
+      },
+      {
+        src: 'IMG-20200803-WA0004.jpg',
+        title: 'Tying the Sacred Rakhi 🧵',
+        tag: 'Raksha Bandhan Ritual',
+        desc: 'Tying the sacred rakhi thread on our wrists—a cherished promise of lifelong protection, respect, and unconditional care.'
+      },
+      {
+        src: 'IMG_20221004_170625.jpg',
+        title: 'Royal Blue Saree & Festive Walk ✨',
+        tag: 'Durga Puja Celebrations',
+        desc: 'Didi looking elegant and radiant in her royal blue silk saree, walking down the festive street flanked by her proud brothers.'
+      },
+      {
+        src: 'IMG_20191027_205612.jpg',
+        title: 'Chilly Nights & Sweet Rooftop Talks 🌙',
+        tag: 'Terrace Chats',
+        desc: 'Endless chatter, snacks, laughter, and sibling teasing on the roof terrace under the open starry night.'
+      },
+      {
+        src: 'IMG-20190708-WA0016.jpg',
+        title: 'All Smiles Together in Nature 🌿',
+        tag: 'Family Scenic Trip',
+        desc: 'Family trips with green hills behind us and bright smiles in front. A reminder of joyous journeys shared as siblings.'
+      },
+      {
+        src: 'IMG-20220812-WA0040.jpg',
+        title: 'United in Love & Blessings 👨‍👩‍👧‍👦',
+        tag: 'Family Gathering',
+        desc: 'A full house gathering in colorful ethnic festive wear—brothers and sister together, creating memories to treasure for a lifetime.'
+      },
+      {
+        src: 'IMG-20220812-WA0009.jpg',
+        title: 'Peaceful Sibling Presence 🌸',
+        tag: 'Home Candid',
+        desc: 'Sitting together at home in quiet comfort—the unspoken bond of siblings that needs no words.'
+      }
+    ];
+
+    let currentMemoryIndex = 0;
+
+    function handleImgError(imgEl, fallbackTitle, gradientClass, isDark = false) {
+      const parent = imgEl.parentElement;
+      imgEl.style.display = 'none';
+      const fallback = document.createElement('div');
+      fallback.className = `w-full h-full flex flex-col items-center justify-center p-4 text-center bg-gradient-to-tr ${gradientClass} ${isDark ? 'text-white' : 'text-stone-800'}`;
+      fallback.innerHTML = `
+        <span class="text-4xl mb-2">📸</span>
+        <span class="font-bold text-sm">${fallbackTitle}</span>
+        <span class="text-xs opacity-75 mt-1">Didi's Precious Memory</span>
+      `;
+      parent.appendChild(fallback);
+    }
+
+    function handleVideoError(videoEl) {
+      document.getElementById('videoFallbackPrompt').classList.remove('hidden');
+    }
+
+    function retryVideoPlayback() {
+      const video = document.getElementById('drivingVideo');
+      document.getElementById('videoFallbackPrompt').classList.add('hidden');
+      video.load();
+      video.play().catch(e => console.log('User interaction needed to play'));
+    }
+
+    function openLightbox(index) {
+      currentMemoryIndex = index;
+      renderLightbox();
+      document.getElementById('lightboxModal').classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightboxModal').classList.add('hidden');
+    }
+
+    function navigateLightbox(dir) {
+      currentMemoryIndex = (currentMemoryIndex + dir + memories.length) % memories.length;
+      renderLightbox();
+    }
+
+    function renderLightbox() {
+      const item = memories[currentMemoryIndex];
+      const visualDiv = document.getElementById('lightboxVisual');
+      visualDiv.innerHTML = `
+        <img src="${item.src}" alt="${item.title}" class="w-full h-full object-contain bg-stone-950" onerror="this.onerror=null; this.src='https://placehold.co/800x600/fecdd3/881337?text=${encodeURIComponent(item.tag)}'">
+      `;
+
+      document.getElementById('lightboxTag').innerText = item.tag;
+      document.getElementById('lightboxTitle').innerText = item.title;
+      document.getElementById('lightboxDescription').innerText = item.desc;
+      document.getElementById('lightboxCounter').innerText = `${currentMemoryIndex + 1} / ${memories.length}`;
+      
+      try {
+        if (window.lucide) lucide.createIcons();
+      } catch (e) {}
+    }
+
+    function initBalloons() {
+      const container = document.getElementById('balloon-container');
+      const colors = ['#f43f5e', '#ec4899', '#fbbf24', '#a855f7', '#3b82f6', '#10b981'];
+      for (let i = 0; i < 8; i++) {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const size = Math.floor(Math.random() * 22) + 36;
+        const left = Math.floor(Math.random() * 92);
+        const delay = Math.random() * 8;
+        const duration = Math.random() * 8 + 11;
+
+        balloon.style.left = left + 'vw';
+        balloon.style.animationDelay = delay + 's';
+        balloon.style.animationDuration = duration + 's';
+        balloon.innerHTML = `
+          <svg width="${size}" height="${size * 1.3}" viewBox="0 0 50 65" fill="${color}">
+            <path d="M25 0 C11.2 0 0 11.2 0 25 C0 38.8 11.2 55 25 55 C38.8 55 50 38.8 50 25 C50 11.2 38.8 0 25 0 Z"/>
+            <polygon points="22,55 28,55 25,60" fill="${color}"/>
+            <line x1="25" y1="60" x2="25" y2="70" stroke="#78716c" stroke-width="1.5"/>
+          </svg>
+        `;
+        container.appendChild(balloon);
+      }
+    }
+    initBalloons();
+
+    let audioCtx = null;
+    let isPlayingMelody = false;
+    let melodyTimeout = null;
+
+    function playNote(freq, startTime, duration) {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, startTime);
+
+        gain.gain.setValueAtTime(0, startTime);
+        gain.gain.linearRampToValueAtTime(0.2, startTime + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + duration);
+      } catch (e) {
+        console.warn('Audio play note error:', e);
+      }
+    }
+
+    function toggleBirthdayMelody() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      const musicIcon = document.getElementById('musicIcon');
+      const musicText = document.getElementById('musicText');
+
+      if (isPlayingMelody) {
+        isPlayingMelody = false;
+        clearTimeout(melodyTimeout);
+        musicIcon.innerHTML = `<i data-lucide="volume-2" class="w-4 h-4 text-rose-600"></i>`;
+        musicText.innerText = "Play B'day Melody 🎵";
+        if (window.lucide) lucide.createIcons();
+        showToast("Audio melody paused", "🔇");
+        return;
+      }
+
+      isPlayingMelody = true;
+      musicIcon.innerHTML = `<i data-lucide="volume-x" class="w-4 h-4 text-rose-600"></i>`;
+      musicText.innerText = "Pause Melody ⏸️";
+      if (window.lucide) lucide.createIcons();
+      showToast("Playing Happy Birthday Melody! 🎶", "🎵");
+
+      // Happy Birthday Notes in Hz
+      const notes = [
+        { f: 261.6, d: 0.3 }, { f: 261.6, d: 0.3 }, { f: 293.7, d: 0.6 }, { f: 261.6, d: 0.6 }, { f: 349.2, d: 0.6 }, { f: 329.6, d: 1.0 },
+        { f: 261.6, d: 0.3 }, { f: 261.6, d: 0.3 }, { f: 293.7, d: 0.6 }, { f: 261.6, d: 0.6 }, { f: 392.0, d: 0.6 }, { f: 349.2, d: 1.0 },
+        { f: 261.6, d: 0.3 }, { f: 261.6, d: 0.3 }, { f: 523.3, d: 0.6 }, { f: 440.0, d: 0.6 }, { f: 349.2, d: 0.6 }, { f: 329.6, d: 0.6 }, { f: 293.7, d: 1.0 },
+        { f: 466.2, d: 0.3 }, { f: 466.2, d: 0.3 }, { f: 440.0, d: 0.6 }, { f: 349.2, d: 0.6 }, { f: 392.0, d: 0.6 }, { f: 349.2, d: 1.2 }
+      ];
+
+      let startTime = audioCtx.currentTime + 0.1;
+      let totalDuration = 0;
+
+      notes.forEach((note) => {
+        playNote(note.f, startTime + totalDuration, note.d);
+        totalDuration += note.d + 0.08;
+      });
+
+      melodyTimeout = setTimeout(() => {
+        if (isPlayingMelody) {
+          toggleBirthdayMelody();
+        }
+      }, totalDuration * 1000);
+    }
+
+    let candleBlown = false;
+    function blowCandle() {
+      const flame = document.getElementById('candleFlame');
+      const status = document.getElementById('candleStatus');
+      const inst = document.getElementById('cakeInstruction');
+
+      if (!candleBlown) {
+        candleBlown = true;
+        flame.classList.remove('flame-active');
+        flame.style.opacity = '0';
+        flame.style.transform = 'scale(0.2)';
+        status.innerText = "Candle Blown! 💨";
+        status.className = "text-xs font-bold px-2.5 py-1 rounded-full bg-stone-200 text-stone-700";
+        inst.innerHTML = "✨ Wish made! Now tap <span class='text-rose-600 font-bold'>'Cut Cake!'</span> to celebrate!";
+        
+        triggerConfettiBurst({
+          particleCount: 55,
+          origin: { x: 0.5, y: 0.55 }
+        });
+        showToast("Candle blown! May all Didi's wishes come true! 🌟", "🕯️");
+      } else {
+        candleBlown = false;
+        flame.classList.add('flame-active');
+        flame.style.opacity = '1';
+        flame.style.transform = 'scale(1)';
+        status.innerText = "Candle Lit 🕯️";
+        status.className = "text-xs font-bold px-2.5 py-1 rounded-full bg-amber-100 text-amber-800";
+        inst.innerText = "Candle relit! Ready for another wish!";
+      }
+    }
+
+    function cutCake() {
+      triggerConfettiBurst({
+        particleCount: 120,
+        origin: { x: 0.5, y: 0.5 }
+      });
+      showToast("Cake Cut! Happy Birthday Didi! 🎂🎉", "🍰");
+      if (!isPlayingMelody) {
+        toggleBirthdayMelody();
+      }
+    }
+
+    function triggerCakeCeremony() {
+      document.getElementById('cakeArea').scrollIntoView({ behavior: 'smooth' });
+      cutCake();
+    }
+
+    function launchFireworks() {
+      const canvas = document.getElementById('fireworksCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+
+      const particles = [];
+      const colors = ['#f43f5e', '#fbbf24', '#38bdf8', '#34d399', '#c084fc', '#ffffff'];
+
+      for (let i = 0; i < 90; i++) {
+        particles.push({
+          x: canvas.width / 2 + (Math.random() - 0.5) * 120,
+          y: canvas.height / 2 + (Math.random() - 0.5) * 60,
+          vx: (Math.random() - 0.5) * 8,
+          vy: (Math.random() - 0.5) * 8,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          alpha: 1,
+          radius: Math.random() * 3 + 1.5
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let active = false;
+
+        particles.forEach((p) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.05;
+          p.alpha -= 0.015;
+
+          if (p.alpha > 0) {
+            active = true;
+            ctx.save();
+            ctx.globalAlpha = p.alpha;
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+          }
+        });
+
+        if (active) {
+          requestAnimationFrame(animate);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+      animate();
+
+      triggerConfettiBurst({
+        particleCount: 100,
+        origin: { x: 0.5, y: 0.8 }
+      });
+      showToast("Fireworks launched in honor of Didi! 🎆", "🎇");
+    }
+
+    function copyShareMessage() {
+      const textToCopy = "दीदी, आपको जन्मदिन की बहुत-बहुत शुभकामनाएं! 🎂💖 May your day be as radiant, cheerful, and loving as you are to all of us. Lots of love from all your brothers!";
+      
+      const tempInput = document.createElement("textarea");
+      tempInput.value = textToCopy;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+
+      showToast("Birthday greeting copied to clipboard! 📋", "💌");
+    }
+
+    function showToast(message, icon = "✨") {
+      const toast = document.getElementById('toastNotification');
+      document.getElementById('toastText').innerText = message;
+      document.getElementById('toastIcon').innerText = icon;
+
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 3500);
+    }
+
+    // Auto welcome confetti on initial load
+    window.onload = function() {
+      setTimeout(() => {
+        triggerConfettiBurst({
+          particleCount: 50,
+          origin: { x: 0.5, y: 0.3 }
+        });
+      }, 500);
+    };
+  </script>
+</body>
+</html>
